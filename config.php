@@ -1,6 +1,16 @@
 <?php
 
-define('DB_HOST', 'your_database_host');
-define('DB_NAME', 'your_database_name');
-define('DB_USER', 'your_database_user');
-define('DB_PASS', 'your_database_password');
+$localConfig = __DIR__ . '/config.local.php';
+
+if (is_file($localConfig)) {
+    require_once $localConfig;
+} else {
+    foreach (['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS'] as $name) {
+        $value = getenv($name);
+        if ($value === false || $value === '') {
+            throw new RuntimeException("Missing database configuration: {$name}");
+        }
+
+        define($name, $value);
+    }
+}
