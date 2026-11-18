@@ -18,4 +18,4 @@ jobs:
             **/.git*/**
             schema.sql
             README.md
-            config.sample.php
+            config.example.php
