@@ -119,6 +119,7 @@ function top($t)
             <p><a href="?p=registro">Crear mi negocio</a></p>
         </form><?php bot();
                     case 'registro':
+
                         if (post()) {
                             if (strlen($_POST['clave']) < 6) go('registro', 'La clave debe tener 6 o más caracteres');
                             if (q("SELECT id FROM usuarios WHERE email=?", [$_POST['email']])->fetch()) go('registro', 'Ese correo ya existe');
